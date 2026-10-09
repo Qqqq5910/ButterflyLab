@@ -3,9 +3,16 @@
 ## Publication
 
 - Repository: https://github.com/Qqqq5910/ButterflyLab
-- Release candidate/main verified before tagging: `5bac0c4eb7dda99cdcfb649e0976757428d4c1ec`.
-- Release CI: [37893220020](https://github.com/Qqqq5910/ButterflyLab/actions/runs/37893220020), **PASS**.
+- Main at publication / v0.1.1 target commit: `825d1e2dbb60454d6d84385e4ec6904352cfbf52`.
+- Annotated tag object SHA: `e6f3db5c37948fe41e878edb169e856455ca493a`.
+- Release CI: [37893699084](https://github.com/Qqqq5910/ButterflyLab/actions/runs/37893699084), **PASS**.
+- Initial Linux acceptance CI: [37893220020](https://github.com/Qqqq5910/ButterflyLab/actions/runs/37893220020), **PASS**.
+- Tag-triggered CI: [37893912124](https://github.com/Qqqq5910/ButterflyLab/actions/runs/37893912124), **PASS**.
 - Release: https://github.com/Qqqq5910/ButterflyLab/releases/tag/v0.1.1
+- Published 2026-10-09 06:30:50 UTC; API read-back confirms normal Release,
+  neither draft nor prerelease, with the requested title.
+- This report's publication evidence is a subsequent documentation commit on main;
+  the immutable release tag is not moved. The main SHA above is the publication snapshot.
 - Existing v0.1.0 commit retained: `bd12666c52121a158162c1a537c3b4a3453b226d`.
 - Experience update only: no simulation formulas, random streams, decisions,
   search algorithms, metric definitions or historical schemas changed.
@@ -59,17 +66,30 @@ Incumbent local services and historical databases were preserved.
   reproduction: PASS. Experiment `d5d02350-ad8a-4bd5-b6b8-93b728d568c0`,
   seeds 42-46, engine `social-1.0.0`, `identical: true`, `real_ready: false`,
   zero page errors. Summary downloaded to ignored local acceptance output.
-- Release allowlist scan: 105 public files plus three build files, zero findings;
+- Release allowlist scan: 106 public files plus three build files, zero findings;
   no operator account/key file read. Full index/history audit also required before commit.
+- Full index/history audit: 106 files and 115 historical blobs; zero findings
+  before the final experience/documentation commit. No database, private logs,
+  account file, key, build cache or large trajectory staged.
 - No paid API request or public deployment in this release.
 - Linux CI: 98 passed in 10.71 seconds; launcher smoke reports PASS for both
   real free simulation/reproduction and cleanup. Ubuntu runner image 24.04.
 - Windows Ctrl+C released ports 8004/5176; incumbent ports 8001/8002/5173/5174
   still belonged to their original processes afterward.
+- Remote English README: actual GitHub desktop/mobile GIF loaded at 960 x 540;
+  screenshots four seconds apart differed at both widths, confirming playback.
+  Badge images also loaded; Quick Start and research text rendered.
+- GitHub intermittently returned 503/504 for pages and auxiliary resources;
+  unrelated global-navigation 404s also occurred. These are not reported as clean
+  browser console results. Chinese README exists and its 5,497-byte file was
+  read back through GitHub API, but main/tag browser routes repeatedly returned
+  503/504. **Chinese remote rendering NOT VERIFIED** in this session.
 
 ## Limits
 
 - macOS not verified; Social Preview needs manual settings upload.
+- Chinese README remote page rendering blocked by GitHub 503/504, despite
+  successful source/API verification; no complete remote rendering claim.
 - No MP4 required: GIF is well below the eight MB target.
 - Real multi-seed LLM society study remains incomplete. One historical TokenHub
   connectivity request is not research evidence.
