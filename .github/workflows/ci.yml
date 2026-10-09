@@ -26,5 +26,6 @@ jobs:
       - run: python -m backend.verify_pilot
       - run: npm ci && npm run build
         working-directory: frontend
+      - run: python scripts/startup_smoke.py
       - run: python -m backend.release_scan
       - run: python -m backend.repository_hygiene

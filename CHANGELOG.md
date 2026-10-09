@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.1.1 — Open Source Experience Improvements
+
+- GitHub description and eight capability-specific topics; no hosted homepage.
+- 24-second real Rule GIF and 1280 x 640 social preview upload asset.
+- Bilingual README demo-first introduction, free workflow and platform guidance.
+- Unix launcher dependency reuse, owned-process cleanup and Linux CI startup test.
+- Windows dependency reuse, contribution guidance and three concise Issue templates.
+- Research engines, random streams, metrics and historical formats unchanged.
+
 ## v0.1.0 — Initial Public Release
 
 - World Studio, three network topologies, dynamic trust/cooperation and diffusion.

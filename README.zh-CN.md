@@ -4,9 +4,11 @@
 
 开源多智能体研究实验室：模拟平行社会，探索敏感干预，以可复现的实验研究群体涌现。
 
-[English](README.md) | 中文 · [快速启动](#快速启动) · [方法](RESEARCH.md)
+[English](README.md) | 中文 · [快速启动](#快速启动) · [最新发布](https://github.com/Qqqq5910/ButterflyLab/releases/latest) · [方法](RESEARCH.md)
 
-![真实平行世界与科研控制台](docs/assets/hero.png)
+![24 秒真实 Rule 演示：创建、演化、干预、对比与传播覆盖率](docs/assets/butterflylab-demo.gif)
+
+[完整控制台截图](docs/assets/hero.png)。录制过程没有模型调用；差异很小或为零也是有效结果。
 
 免费 Rule / Mock 无需 API Key。曲线由后端真实模拟计算，平台不预测现实社会。
 
@@ -19,8 +21,7 @@
 5. **探索敏感条件**：单轴/双轴扫描、候选区域加密、独立种子验证。
 6. **复现实验**：保存配置与完整轨迹，导出摘要或无损归档，验证记录回放。
 
-![World Studio](docs/assets/world-studio.png)
-![敏感性与临界区域探索](docs/assets/sensitivity.png)
+[World Studio 截图](docs/assets/world-studio.png) · [敏感性探索截图](docs/assets/sensitivity.png)
 
 ## 快速启动
 
@@ -33,14 +34,17 @@ powershell -ExecutionPolicy Bypass -File scripts/free-demo.ps1
 ```
 
 打开本机 `http://127.0.0.1:5173/`。这是本地 Demo，尚无公网在线服务。
-端口占用时附加 `-ApiPort 8004 -WebPort 5176`。依赖完整时复用前端安装，默认禁用付费模型。
+端口占用时附加 `-ApiPort 8004 -WebPort 5176`。依赖完整时复用安装，默认禁用付费模型。
 
 World Studio 点击 **Run Demo**，运行免费的 50 Agent、5 种子 Information Cascade 基线。
-运行五个配对种子、施加局部信息干预，查看传播覆盖率和 A/B 网络。
+接着选择 information、Agent 1、幅度 1，点击 **Run A/B experiment**，查看五种子的传播覆盖率和 A/B 网络。
+Agent 0 已是信息源，因此演示向 Agent 1 注入信息。
 调整全局传播概率请进入 Sensitivity Lab 扫描 transmission；局部干预含义不同。
 保存实验、刷新恢复并导出 Summary JSON / Full archive。
 
-Linux/macOS 可用 `sh scripts/free-demo.sh`，但未在本机验证这些平台。
+Linux/macOS 使用 `sh scripts/free-demo.sh`，端口参数为 `--api-port 8004 --web-port 5176`。
+Windows 已本机验证；Linux 通过真实 CI 启动检查，结果见发布报告；macOS **尚未验证**。
+Ctrl+C 退出，Unix 脚本仅清理自身启动的服务。
 手动启动、端口与 API 文档见 [英文说明](README.md#quick-start)。
 仅监听本机，应用不含身份认证。
 
@@ -79,7 +83,7 @@ A/B 共用初始状态和可寻址随机流；报告配对差值、样本标准�
 上限 100 Agent，密度控制近似，未完成浏览器进程内存基准。
 
 [架构](ARCHITECTURE.md) · [指标公式](RESEARCH.md) · [实验](EXPERIMENTS.md) ·
-[设计](DESIGN.md) · [发布报告](docs/RELEASE_V0.1.0_REPORT.md)
+[设计](DESIGN.md) · [发布报告](docs/RELEASE_V0.1.1_REPORT.md)
 
 ## 后续与贡献
 

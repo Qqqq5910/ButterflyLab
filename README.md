@@ -2,8 +2,8 @@
 
 **What if one tiny change could reshape an entire artificial society?**
 
-An open-source multi-agent research laboratory for simulating parallel societies,
-discovering sensitive interventions, and exploring emergent behavior through reproducible experiments.
+ButterflyLab is an open-source research laboratory for exploring how small interventions
+influence emergent behavior in artificial multi-agent societies.
 
 ![Python 3.14.6](https://img.shields.io/badge/Python-3.14.6-3776AB)
 ![React 19](https://img.shields.io/badge/React-19-61DAFB)
@@ -11,9 +11,13 @@ discovering sensitive interventions, and exploring emergent behavior through rep
 [![Free verification](https://github.com/Qqqq5910/ButterflyLab/actions/workflows/ci.yml/badge.svg)](https://github.com/Qqqq5910/ButterflyLab/actions/workflows/ci.yml)
 
 English | [中文](README.zh-CN.md) · [Quick Start](#quick-start) ·
+[Latest Release](https://github.com/Qqqq5910/ButterflyLab/releases/latest) ·
 [Research](#research-highlights) · [Methods](RESEARCH.md) · [Contribute](CONTRIBUTING.md)
 
-![Real parallel worlds and research console](docs/assets/hero.png)
+![24-second real Rule demo: create, evolve, intervene, compare and inspect coverage](docs/assets/butterflylab-demo.gif)
+
+[Full research console screenshot](docs/assets/hero.png). Recorded Rule simulation, no model calls;
+small or zero differences are valid outcomes.
 
 ## Explore Freely
 
@@ -29,8 +33,8 @@ ButterflyLab studies its synthetic model; it does not predict real societies.
 | **05 — Discover Sensitive Conditions** | Scan parameters, refine candidate regions and validate on held-out seeds. |
 | **06 — Reproduce the Experiment** | Save configurations, metrics and full trajectories; verify recorded replay. |
 
-![World Studio](docs/assets/world-studio.png)
-![Sensitivity and criticality research](docs/assets/sensitivity.png)
+[World Studio screenshot](docs/assets/world-studio.png) ·
+[Sensitivity and criticality screenshot](docs/assets/sensitivity.png)
 
 ## Quick Start
 
@@ -44,15 +48,27 @@ powershell -ExecutionPolicy Bypass -File scripts/free-demo.ps1
 
 Open `http://127.0.0.1:5173/` locally. This is a **Local Demo**, not a hosted service.
 Occupied ports? Append `-ApiPort 8004 -WebPort 5176`. The Windows launcher reuses
-a valid frontend install and forces real model calls off by default.
+a valid dependency install and forces real model calls off by default.
 
 Click **Run Demo** in World Studio to run a free 50-Agent, five-seed Information Cascade baseline.
-Run the baseline, apply a local information intervention, run five paired seeds,
-inspect coverage and export Summary JSON. To change the *global* transmission
+Then choose **information**, Agent **1**, magnitude **1**, and **Run A/B experiment**
+(Agent 0 is already the information origin). Inspect coverage and **Summary JSON**.
+To change the *global* transmission
 probability, use Sensitivity Lab to scan transmission; a local intervention differs.
 
-Linux/macOS: `sh scripts/free-demo.sh` with the same runtimes. These platforms
-have not been verified locally. Manual startup:
+Linux/macOS with the same runtimes:
+
+```sh
+git clone https://github.com/Qqqq5910/ButterflyLab.git
+cd ButterflyLab
+sh scripts/free-demo.sh
+# Occupied ports: sh scripts/free-demo.sh --api-port 8004 --web-port 5176
+```
+
+Windows is tested locally. Linux is tested by the release CI's real launcher/API
+smoke test; see the [v0.1.1 report](docs/RELEASE_V0.1.1_REPORT.md) for its result.
+macOS is **NOT TESTED**. Exit with Ctrl+C; the Unix launcher cleans up its own services.
+Manual startup:
 
 ```sh
 python3.14 -m venv .venv
@@ -91,7 +107,7 @@ amplify: resource −1 yielded zero mean cooperation change in the tested settin
 | TokenHub `gpt-5.6-luna` | Exactly one real connectivity request accepted. |
 | Real multi-seed LLM society study | **Not completed**: account-effective price unverified and reported input above target. |
 
-![Saved five-seed Mock comparison, no live API calls](docs/assets/llm-society.png)
+[Saved five-seed Mock comparison screenshot, no live API calls](docs/assets/llm-society.png)
 
 Recorded replay uses stored decisions and makes no live model calls. The historical
 connectivity action is an integration fixture, **not a completed LLM society experiment**.
@@ -146,7 +162,7 @@ npm run build
 Local release baseline: **98 backend tests passed**; frontend build passed.
 CI runs Rule/Mock only, with no paid keys. Bundle-size and dependency deprecation
 warnings are documented. Population cap is 100; density matching is approximate;
-browser-process memory has not been benchmarked. [Release report](docs/RELEASE_V0.1.0_REPORT.md).
+browser-process memory has not been benchmarked. [Release report](docs/RELEASE_V0.1.1_REPORT.md).
 
 ## Roadmap
 

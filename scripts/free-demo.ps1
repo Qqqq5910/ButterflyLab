@@ -4,8 +4,11 @@ $root=Split-Path $PSScriptRoot -Parent
 Set-Location $root
 if (-not $LLM) { $env:BUTTERFLYLAB_REAL_LLM_ENABLED='0' }
 if (-not (Test-Path '.venv/Scripts/python.exe')) { py -3.14 -m venv .venv }
-& '.venv/Scripts/python.exe' -m pip install -r backend/requirements.lock.txt
-if ($LASTEXITCODE -ne 0) { throw 'Python dependency setup failed' }
+& '.venv/Scripts/python.exe' -m backend.check_environment *> $null
+if ($LASTEXITCODE -ne 0) {
+    & '.venv/Scripts/python.exe' -m pip install -r backend/requirements.lock.txt
+    if ($LASTEXITCODE -ne 0) { throw 'Python dependency setup failed' }
+}
 & '.venv/Scripts/python.exe' -m backend.check_environment
 if ($LASTEXITCODE -ne 0) { throw 'Unsupported runtime' }
 Push-Location frontend

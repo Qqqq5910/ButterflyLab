@@ -1,0 +1,17 @@
+name: Research Reproduction
+description: Investigate an experiment mismatch with traceable evidence.
+body:
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Configuration and environment
+      description: Include engine/runtime fingerprints, complete configuration, paired seeds and release.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Expected and observed results
+      description: Metrics, reproduction steps and archive checksums. No credentials or private trajectories.
+    validations:
+      required: true

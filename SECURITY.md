@@ -19,3 +19,5 @@ Cancellation stops new requests; an already in-flight request may run until its
 If a key is exposed, revoke it at the provider and audit every published file,
 artifact and Git revision; removing the latest copy is insufficient. Report
 vulnerabilities privately to the repository owner rather than posting secrets.
+Public Issues and Pull Requests must never include API keys, account files or
+unsanitized request logs. Share a minimal free Rule/Mock reproduction instead.

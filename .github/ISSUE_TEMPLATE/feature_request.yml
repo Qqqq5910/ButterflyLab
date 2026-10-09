@@ -1,0 +1,10 @@
+name: Feature Request
+description: Explain a research or workflow need.
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Problem and proposed behavior
+      description: Who needs it, why, and what alternatives have you tried?
+    validations:
+      required: true
