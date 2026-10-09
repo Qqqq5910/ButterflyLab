@@ -14,7 +14,7 @@ English | [中文](README.zh-CN.md) · [Quick Start](#quick-start) ·
 [Latest Release](https://github.com/Qqqq5910/ButterflyLab/releases/latest) ·
 [Research](#research-highlights) · [Methods](RESEARCH.md) · [Contribute](CONTRIBUTING.md)
 
-![24-second real Rule demo: create, evolve, intervene, compare and inspect coverage](docs/assets/butterflylab-demo.gif)
+![24-second real Rule demo: create, evolve, intervene, compare and inspect coverage](https://raw.githubusercontent.com/Qqqq5910/ButterflyLab/main/docs/assets/butterflylab-demo.gif)
 
 [Full research console screenshot](docs/assets/hero.png). Recorded Rule simulation, no model calls;
 small or zero differences are valid outcomes.

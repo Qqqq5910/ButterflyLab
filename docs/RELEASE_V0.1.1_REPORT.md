@@ -3,7 +3,8 @@
 ## Publication
 
 - Repository: https://github.com/Qqqq5910/ButterflyLab
-- Main/tag SHA and release CI: pending final remote verification; recorded below after publication.
+- Release candidate/main verified before tagging: `5bac0c4eb7dda99cdcfb649e0976757428d4c1ec`.
+- Release CI: [37893220020](https://github.com/Qqqq5910/ButterflyLab/actions/runs/37893220020), **PASS**.
 - Release: https://github.com/Qqqq5910/ButterflyLab/releases/tag/v0.1.1
 - Existing v0.1.0 commit retained: `bd12666c52121a158162c1a537c3b4a3453b226d`.
 - Experience update only: no simulation formulas, random streams, decisions,
@@ -22,6 +23,8 @@
   injection and five-seed A/B coverage results. No curves or effects fabricated.
 - Bilingual README puts the GIF, free Quick Start, latest release and accurate
   research limits first. Other full-size screenshots are links to limit eager loading.
+  GIF uses GitHub's raw content host: the repository raw redirect intermittently
+  returned 504 during acceptance, while the raw content host returned 200.
 - `docs/assets/social-preview.png`: 1280 x 640, real product network screenshot.
   **Prepared, NOT SET through GitHub settings.** Upload manually: repository
   Settings > General > Social preview > Edit > Upload an image; choose this file
@@ -33,7 +36,7 @@
 | Platform | Status | Actual evidence |
 | --- | --- | --- |
 | Windows | PASS | Python 3.14.6 / Node 24.19.0; PowerShell launcher, isolated SQLite, ports 8004/5176; browser free A/B, refresh, export and exact reproduction. |
-| Linux | Pending release CI | Ubuntu runner installs locked dependencies, starts real Unix launcher, checks frontend/proxied API, five-seed A/B, reproduction, free gate and child cleanup. |
+| Linux | PASS | Ubuntu 24.04 GitHub runner, Python 3.14.6 / Node 24.19.0; locked installs, actual Unix launcher, frontend/proxied API, five-seed A/B, reproduction, free gate and child cleanup. |
 | macOS | NOT TESTED | No macOS runner used; no claim based on Windows/static inspection. |
 
 The Unix launcher reuses valid installs and owns exactly two child processes.
@@ -59,6 +62,10 @@ Incumbent local services and historical databases were preserved.
 - Release allowlist scan: 105 public files plus three build files, zero findings;
   no operator account/key file read. Full index/history audit also required before commit.
 - No paid API request or public deployment in this release.
+- Linux CI: 98 passed in 10.71 seconds; launcher smoke reports PASS for both
+  real free simulation/reproduction and cleanup. Ubuntu runner image 24.04.
+- Windows Ctrl+C released ports 8004/5176; incumbent ports 8001/8002/5173/5174
+  still belonged to their original processes afterward.
 
 ## Limits
 

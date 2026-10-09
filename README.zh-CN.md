@@ -6,7 +6,7 @@
 
 [English](README.md) | 中文 · [快速启动](#快速启动) · [最新发布](https://github.com/Qqqq5910/ButterflyLab/releases/latest) · [方法](RESEARCH.md)
 
-![24 秒真实 Rule 演示：创建、演化、干预、对比与传播覆盖率](docs/assets/butterflylab-demo.gif)
+![24 秒真实 Rule 演示：创建、演化、干预、对比与传播覆盖率](https://raw.githubusercontent.com/Qqqq5910/ButterflyLab/main/docs/assets/butterflylab-demo.gif)
 
 [完整控制台截图](docs/assets/hero.png)。录制过程没有模型调用；差异很小或为零也是有效结果。
 
