@@ -42,6 +42,13 @@ not guaranteed speed. These are finite synthetic societies, not real-world forec
 The new adapter has no new scientific engine version because no equation, random
 stream or metric changed. Application version and scientific engine version are distinct.
 
+Cross-platform verification: deployed Linux trajectories versus Windows recomputation
+matched exactly for 12/15 paired runs. The other three differ only in modularity
+round-off, maximum absolute error `2.220446049250313e-16`; all discrete state and
+numeric comparisons pass tolerance `1e-12`. Same-runtime CI recomputation is strict
+full equality. Original floating values remain lossless. Run
+`python scripts/verify_online_demo.py` after local generation to repeat the online check.
+
 Local `/api/explore/run` validates schemas, persists through the existing Store and
 trajectory format, and supports the existing summary/archive/reproduce endpoints.
 The full original Research console is lazy-loaded locally. Public Research entry

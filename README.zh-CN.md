@@ -1,8 +1,28 @@
 # ButterflyLab
 
-**如果只改变一个微小条件，整个虚拟社会会走向怎样不同的未来？**
+**只改变一件事，看看两个世界会走向哪里。**
 
 开源多智能体研究实验室：模拟平行社会，探索敏感干预，以可复现的实验研究群体涌现。
+
+## 在线免费体验
+
+**[打开 ButterflyLab 在线 Demo](https://qqqq5910.github.io/ButterflyLab/)**
+
+无需安装、注册或 API Key。公开版是 **真实模拟结果的交互式回放**：选择问题、
+确认唯一改变、播放两个匹配的世界、查看真实指标与五种子结果、分享场景与时间点。
+只运行完全匹配的预计算场景；自定义条件需要本地完整版，不能把虚拟社会当成现实预测。
+
+![Explore Mode：问题、条件确认、同步平行世界与真实结果](https://raw.githubusercontent.com/Qqqq5910/ButterflyLab/main/docs/assets/butterflylab-explore.gif)
+
+| 场景 | 唯一改变 | 主要观测 |
+| --- | --- | --- |
+| The Information Ripple | 全局传播概率 0.1 → 0.2 | 信息覆盖率 |
+| The Influential Node | 初始度数最大的未获知节点接收信息，同度数按 ID 选择 | 信息覆盖率 |
+| The Cooperation Dilemma | 全局合作激励 0.3 → 0.6 | 合作率 |
+
+免费中英文模板支持明确的概率、激励、节点和资源减少问题；不支持或非法输入不会生成虚假实验。
+展开 Research Details 可查看配置、种子、公式、不确定性及引擎版本。
+本地 **Research Mode** 保留全部科研工作台与实时模拟。
 
 [English](README.md) | 中文 · [快速启动](#快速启动) · [最新发布](https://github.com/Qqqq5910/ButterflyLab/releases/latest) · [方法](RESEARCH.md)
 
@@ -33,10 +53,12 @@ cd ButterflyLab
 powershell -ExecutionPolicy Bypass -File scripts/free-demo.ps1
 ```
 
-打开本机 `http://127.0.0.1:5173/`。这是本地 Demo，尚无公网在线服务。
+打开本机 `http://127.0.0.1:5173/`，默认进入可实时运行 Rule 模拟的 Explore Mode。
+点击 Research Mode 进入完整科研控制台。
 端口占用时附加 `-ApiPort 8004 -WebPort 5176`。依赖完整时复用安装，默认禁用付费模型。
 
-World Studio 点击 **Run Demo**，运行免费的 50 Agent、5 种子 Information Cascade 基线。
+Explore Mode 选择问题、确认条件后点击 **Explore Parallel Worlds**。
+原流程：进入 Research Mode，World Studio 点击 **Run Demo**，运行免费的 50 Agent、5 种子 Information Cascade 基线。
 接着选择 information、Agent 1、幅度 1，点击 **Run A/B experiment**，查看五种子的传播覆盖率和 A/B 网络。
 Agent 0 已是信息源，因此演示向 Agent 1 注入信息。
 调整全局传播概率请进入 Sensitivity Lab 扫描 transmission；局部干预含义不同。
@@ -79,16 +101,17 @@ A/B 共用初始状态和可寻址随机流；报告配对差值、样本标准�
 `backend/` 为引擎、存储、任务、研究和测试；`frontend/` 为界面与浏览器脚本；
 `examples/` 仅公开小型脱敏证据；`data/`、`output/`、密钥与缓存不发布。
 
-本地发布基线 **98 项后端测试通过**，前端构建通过。CI 仅 Rule/Mock，禁止付费调用。
+本地发布基线 **103 项后端测试 + 8 项解析/分享测试通过**，本地与静态构建通过。
+15 组公开配对轨迹已重算校验。CI 仅 Rule/Mock，禁止付费调用。
 上限 100 Agent，密度控制近似，未完成浏览器进程内存基准。
 
 [架构](ARCHITECTURE.md) · [指标公式](RESEARCH.md) · [实验](EXPERIMENTS.md) ·
-[设计](DESIGN.md) · [发布报告](docs/RELEASE_V0.1.1_REPORT.md)
+[设计](DESIGN.md) · [v0.2.0 发布报告](docs/RELEASE_V0.2.0_REPORT.md) · [公开数据复现](docs/PUBLIC_DEMO.md)
 
 ## 后续与贡献
 
 未来计划：价格/输入问题解决后的真实 LLM 社会实验、模型对比、Causal Trace、
-大规模网络、多重比较校正、严格密度匹配、浏览器内存基准、归档管理与公网 Demo。
+大规模网络、多重比较校正、严格密度匹配、浏览器内存基准与归档管理。
 以上不代表已完成。
 
 [贡献指南](CONTRIBUTING.md) · [安全政策](SECURITY.md) · [更新日志](CHANGELOG.md)。

@@ -1,9 +1,34 @@
 # ButterflyLab
 
-**What if one tiny change could reshape an entire artificial society?**
+**Change One Thing. Watch Two Worlds Diverge.**
 
 ButterflyLab is an open-source research laboratory for exploring how small interventions
-influence emergent behavior in artificial multi-agent societies.
+influence emergent behavior in artificial multi-agent societies. Start with a question,
+confirm one change and watch two matched worlds evolve.
+
+## Try It Online
+
+**[Open the free interactive demo](https://qqqq5910.github.io/ButterflyLab/)**
+
+No installation, account or API key. **Interactive Replay of Real Simulations**:
+three real scenarios, five paired seeds each, synchronized networks, measured curves,
+agent inspection and shareable scenario/seed/round links. Exact presets only;
+custom configurations require the local version. Synthetic societies are not predictions.
+
+![Explore Mode: question, explicit conditions, parallel playback and measured outcome](https://raw.githubusercontent.com/Qqqq5910/ButterflyLab/main/docs/assets/butterflylab-explore.gif)
+
+### Three Worlds to Explore
+
+| Question | One declared change | Primary observation |
+| --- | --- | --- |
+| The Information Ripple | Global transmission probability 0.1 → 0.2 | Information coverage |
+| The Influential Node | Inform the highest initial-degree uninformed node; ties by ID | Information coverage |
+| The Cooperation Dilemma | Global incentive 0.3 → 0.6 | Cooperation rate |
+
+Free Chinese/English templates interpret supported probability, incentive, node and
+resource-loss questions. Unsupported or illegal inputs never produce fabricated results.
+Expand Research Details for configurations, seeds, formulas, uncertainty and engine version.
+The local **Research Mode** preserves the full original console and live simulations.
 
 ![Python 3.14.6](https://img.shields.io/badge/Python-3.14.6-3776AB)
 ![React 19](https://img.shields.io/badge/React-19-61DAFB)
@@ -36,6 +61,8 @@ ButterflyLab studies its synthetic model; it does not predict real societies.
 [World Studio screenshot](docs/assets/world-studio.png) ·
 [Sensitivity and criticality screenshot](docs/assets/sensitivity.png)
 
+<a id="run-locally"></a>
+
 ## Quick Start
 
 Install **Python 3.14.6** and **Node.js 24.19.0**. Dependency versions are locked.
@@ -46,11 +73,13 @@ cd ButterflyLab
 powershell -ExecutionPolicy Bypass -File scripts/free-demo.ps1
 ```
 
-Open `http://127.0.0.1:5173/` locally. This is a **Local Demo**, not a hosted service.
+Open `http://127.0.0.1:5173/` locally. Explore Mode runs live Rule simulations;
+Research Mode opens the complete research console.
 Occupied ports? Append `-ApiPort 8004 -WebPort 5176`. The Windows launcher reuses
 a valid dependency install and forces real model calls off by default.
 
-Click **Run Demo** in World Studio to run a free 50-Agent, five-seed Information Cascade baseline.
+In Explore Mode, select a question, confirm the conditions and click **Explore Parallel Worlds**.
+For the original workflow, enter **Research Mode**, then click **Run Demo** in World Studio to run a free 50-Agent, five-seed Information Cascade baseline.
 Then choose **information**, Agent **1**, magnitude **1**, and **Run A/B experiment**
 (Agent 0 is already the information origin). Inspect coverage and **Summary JSON**.
 To change the *global* transmission
@@ -159,16 +188,18 @@ cd frontend
 npm run build
 ```
 
-Local release baseline: **98 backend tests passed**; frontend build passed.
+Local release baseline: **103 backend tests + 8 interpreter/share tests passed**;
+local and static builds passed; all 15 public paired runs recomputed and checked.
 CI runs Rule/Mock only, with no paid keys. Bundle-size and dependency deprecation
 warnings are documented. Population cap is 100; density matching is approximate;
-browser-process memory has not been benchmarked. [Release report](docs/RELEASE_V0.1.1_REPORT.md).
+browser-process memory has not been benchmarked. [v0.2.0 release report](docs/RELEASE_V0.2.0_REPORT.md)
+and [public data/reproduction guide](docs/PUBLIC_DEMO.md).
 
 ## Roadmap
 
 Real LLM society experiments after pricing/input verification; model comparisons;
 Causal Trace; larger networks; multiple-comparison correction; stricter density
-matching; browser memory benchmarks; archive management; a future hosted demo.
+matching; browser memory benchmarks; archive management.
 These are future work.
 
 ## Contribute and License
