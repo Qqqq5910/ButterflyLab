@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="80" viewBox="0 0 380 80" role="img" aria-label="ButterflyLab">
+  <rect width="380" height="80" rx="4" fill="#111619"/>
+  <path d="M16 40h12l6-16 12 32 6-16h12" stroke="#a9ddc6" fill="none" stroke-width="3"/>
+  <text x="80" y="49" fill="#e9eee9" font-family="Segoe UI, sans-serif" font-size="30">ButterflyLab</text>
+</svg>

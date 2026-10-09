@@ -1,0 +1,13 @@
+{
+  "format_version": 1,
+  "kind": "historical-connectivity-action",
+  "label": "One authentic connectivity response; not a three-agent research pilot",
+  "model": "gpt-5.6-luna",
+  "route": "openai/gpt-5.6-luna",
+  "action": {"cooperate": true, "propagate": true, "target": null, "reason": "Informed builder with score 0.55 above threshold 0.5; moderate neighbor trust supports cooperation and broadcasting."},
+  "usage": {"input_tokens": 4498, "output_tokens": 91, "reasoning_tokens": 0, "seconds": 3.174981200019829},
+  "actual_cost_cny": null,
+  "reservation_cny": 1,
+  "price_verified": false,
+  "simulation_use": "Offline diagnostic: apply this action once to Agent 0 at round 1; all later decisions use explicit rule fallback. Original request context differs from the diagnostic simulation."
+}

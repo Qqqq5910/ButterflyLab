@@ -1,0 +1,38 @@
+async (page) => {
+  const assert=(v,message)=>{if(!v)throw new Error(message);};
+  await page.getByLabel('EXPERIMENT NAME').fill('Phase 2A search / held-out Gini');
+  await page.getByLabel('TARGET METRIC').selectOption('inequality');
+  await page.getByLabel('DIRECTION',{exact:true}).selectOption('increase');
+  await page.getByLabel('CANDIDATE BUDGET / 1-24').fill('3');
+  const previous=await page.evaluate(()=>localStorage.getItem('butterflylab.experiment'));
+  await page.getByRole('button',{name:'Search interventions',exact:true}).click();
+  await page.waitForFunction(id=>localStorage.getItem('butterflylab.experiment')!==id,previous);
+  await page.waitForFunction(()=>document.querySelector('.run-status').textContent.includes('completed'),{},{timeout:60000});
+  const id=await page.evaluate(()=>localStorage.getItem('butterflylab.experiment'));
+  const record=await (await page.request.get('http://127.0.0.1:8001/api/experiments/'+id)).json();
+  assert(record.kind==='search','Wrong experiment kind');
+  assert(record.progress_completed===30&&record.progress_total===30,'Simulation budget/progress mismatch');
+  assert(record.result.results.length===3,'Candidate count mismatch');
+  assert(record.result.validation.seeds.every(s=>!record.result.discovery_seeds.includes(s)),'Validation seed leakage');
+  assert(record.intervention_config.kind==='resource','Chosen intervention not persisted');
+  assert(await page.locator('#search tbody tr').count()===3,'Ranked table missing');
+  assert(await page.locator('#observatory tbody tr').count()===5,'Validation paired table missing');
+  await page.getByRole('button',{name:'Save experiment',exact:true}).click();
+  await page.getByRole('status').filter({hasText:'Saved to SQLite'}).waitFor();
+  await page.reload();
+  await page.waitForFunction(()=>document.querySelector('#search tbody tr')!==null);
+  assert(await page.getByLabel('TARGET METRIC').inputValue()==='inequality','Search target not restored');
+  await page.getByRole('button',{name:'Reproduce',exact:true}).click();
+  await page.getByRole('status').filter({hasText:'Exact reproduction verified'}).waitFor({timeout:60000});
+  const downloadPromise=page.waitForEvent('download');
+  await page.getByRole('link',{name:'Export JSON',exact:true}).click();
+  await (await downloadPromise).saveAs('D:/Projects/ButterflyLab/output/playwright/phase2a-regression-search.json');
+  await page.screenshot({path:'D:/Projects/ButterflyLab/output/playwright/phase2a-regression-search-desktop.png',fullPage:true});
+  await page.setViewportSize({width:390,height:844});
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.waitForFunction(()=>[...document.querySelectorAll('.recharts-wrapper')].every(element=>element.getBoundingClientRect().right<=innerWidth));
+  await page.screenshot({path:'D:/Projects/ButterflyLab/output/playwright/phase2a-regression-search-mobile.png',fullPage:true});
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Search mobile overflow');
+  await page.setViewportSize({width:1440,height:1000});
+  return {id,simulations:record.progress_total,candidates:record.result.results.map(c=>({agent:c.agent,mean:c.mean_delta,cost:c.cost})),heldout:record.result.validation.summary.inequality};
+}

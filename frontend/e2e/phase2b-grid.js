@@ -1,0 +1,34 @@
+async (page) => {
+  const root='D:/Projects/ButterflyLab/output/playwright/';
+  await page.getByLabel('PAIRED SEEDS / 1-100').fill('5');
+  await page.getByLabel('Study type',{exact:true}).selectOption('sensitivity');
+  await page.getByLabel('X values / comma separated').fill('0,0.1');
+  await page.getByLabel('Y values / comma separated').fill('0,0.6');
+  const previous=await page.evaluate(()=>localStorage.getItem('butterflylab.study'));
+  await page.getByRole('button',{name:'Run research study',exact:true}).click();
+  await page.waitForFunction(id=>localStorage.getItem('butterflylab.study')!==id,previous,{timeout:120000});
+  const id=await page.evaluate(()=>localStorage.getItem('butterflylab.study'));
+  const record=await (await page.request.get('http://127.0.0.1:8001/api/worlds/'+id)).json();
+  if(record.configuration.result.cells.length!==4 || await page.locator('.heatmap tbody td').count()!==4) throw new Error('Full grid not retained/rendered');
+  const download=page.waitForEvent('download');
+  await page.getByRole('button',{name:'Export study JSON',exact:true}).click();
+  await (await download).saveAs(root+'phase2b-grid.json');
+  await page.getByLabel('PAIRED SEEDS / 1-100').fill('30');
+  await page.setViewportSize({width:1440,height:1000});
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.screenshot({path:root+'phase2b-desktop-top.png'});
+  await page.locator('#observatory').scrollIntoViewIfNeeded();
+  await page.screenshot({path:root+'phase2b-desktop-charts.png'});
+  await page.locator('#studies').screenshot({path:root+'phase2b-grid-desktop.png'});
+  await page.setViewportSize({width:390,height:844});
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.screenshot({path:root+'phase2b-mobile-top.png'});
+  await page.locator('#observatory').scrollIntoViewIfNeeded();
+  await page.waitForFunction(()=>[...document.querySelectorAll('.recharts-wrapper')].every(e=>e.getBoundingClientRect().right<=innerWidth));
+  await page.screenshot({path:root+'phase2b-mobile-charts.png'});
+  await page.locator('#studies').screenshot({path:root+'phase2b-grid-mobile.png'});
+  if(!await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)) throw new Error('Mobile overflow');
+  await page.setViewportSize({width:1440,height:1000});
+  await page.evaluate(()=>window.scrollTo(0,0));
+  return {id,cells:4,seeds:record.configuration.result.seeds,summary:record.configuration.result.cells.map(c=>({x:c.x,y:c.y,summary:c.summary.mean_trust}))};
+}
