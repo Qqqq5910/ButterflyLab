@@ -35,7 +35,7 @@ powershell -ExecutionPolicy Bypass -File scripts/free-demo.ps1
 打开本机 `http://127.0.0.1:5173/`。这是本地 Demo，尚无公网在线服务。
 端口占用时附加 `-ApiPort 8004 -WebPort 5176`。依赖完整时复用前端安装，默认禁用付费模型。
 
-World Studio 选择 **Information Cascade**，创建 50 Agent 世界并运行基线。
+World Studio 点击 **Run Demo**，运行免费的 50 Agent、5 种子 Information Cascade 基线。
 运行五个配对种子、施加局部信息干预，查看传播覆盖率和 A/B 网络。
 调整全局传播概率请进入 Sensitivity Lab 扫描 transmission；局部干预含义不同。
 保存实验、刷新恢复并导出 Summary JSON / Full archive。

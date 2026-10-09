@@ -4,9 +4,21 @@ Date: 2026-10-09. Publication target: https://github.com/Qqqq5910/ButterflyLab.
 
 ## Publication
 
-Local acceptance is complete. Push, hosted CI, tag and Release are pending at
-this report's initial commit. Final remote evidence will be recorded after publication.
-Status at this point: BLOCKED (publication steps pending).
+Status: **SHIPPED**.
+
+- Default branch: main; initial push succeeded without force.
+- Release commit: bd12666c52121a158162c1a537c3b4a3453b226d.
+- Annotated v0.1.0 tag points to that verified release commit and is pushed.
+- Release: https://github.com/Qqqq5910/ButterflyLab/releases/tag/v0.1.0.
+- Hosted CI passed: https://github.com/Qqqq5910/ButterflyLab/actions/runs/37885525906.
+  All steps passed: locked runtime/dependencies, 98 tests, free controls,
+  frontend build, public-file/bundle scan and repository hygiene.
+- Remote README checked in a real browser at 1440 and 390 px: all eight
+  README images/badges loaded. Chinese link and Quick Start are present;
+  GitHub identifies the MIT license. GitHub emitted an unrelated global
+  navigation payload 404; repository content and assets rendered successfully.
+- This follow-up report commit documents publication; v0.1.0 remains pinned
+  to the original validated code commit rather than moving the release tag.
 
 ## Engineering acceptance
 
@@ -48,7 +60,13 @@ Full trajectories, SQLite databases, private logs, output, local credentials,
 virtual environments, node_modules and internal design artifacts stay local
 and are ignored. Public-file/bundle, staged-file, history and size scans are
 required before push; final counts are recorded below after verification.
-Known-pattern scans do not constitute an exhaustive security audit.
+Final pre-push scans: 93 reviewed public files, three built frontend files,
+93 history blobs; zero findings. No tracked file exceeds 5 MB. No credentials,
+local database, private output or large trajectory was included in the reviewed
+index. Exact private-key comparison was deliberately not used this round;
+the scanner checked known credential and private-path patterns without reading
+the TokenHub account file. Known-pattern scans do not constitute an exhaustive
+security audit.
 
 ## Remaining scope
 
