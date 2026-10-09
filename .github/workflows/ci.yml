@@ -24,6 +24,10 @@ jobs:
       - run: python -m backend.check_environment
       - run: python -m pytest backend -q
       - run: python -m backend.verify_pilot
+      - run: python scripts/build_public_demo.py
+      - run: python scripts/verify_public_demo.py
+      - run: npm run test:explore
+        working-directory: frontend
       - run: npm ci && npm run build
         working-directory: frontend
       - run: python scripts/startup_smoke.py

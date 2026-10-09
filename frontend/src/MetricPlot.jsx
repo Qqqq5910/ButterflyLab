@@ -1,0 +1,6 @@
+import React from 'react';
+import {ResponsiveContainer,LineChart,Line,XAxis,YAxis,CartesianGrid,Tooltip,Legend,ReferenceLine} from 'recharts';
+export default function MetricPlot({a,b,metric,round,definition}) {
+  const series=a.map((row,i)=>({round:row.round,A:row[metric],B:b[i]?.[metric]}));
+  return <div className="metric-chart"><h3>{definition.name}</h3><div className="plot"><ResponsiveContainer width="100%" height="100%"><LineChart data={series} margin={{left:4,right:20,bottom:24,top:12}}><CartesianGrid stroke="#354244" strokeDasharray="3 3"/><XAxis dataKey="round" ticks={[0,10,20,30,40,50]} label={{value:'Simulation round',position:'insideBottom',offset:-14,fill:'#a0aca6'}} tick={{fill:'#a0aca6'}}/><YAxis domain={metric==='resource_mean'?['auto','auto']:[0,1]} width={48} tick={{fill:'#a0aca6'}}/><Tooltip contentStyle={{background:'#101617',border:'1px solid #465558'}}/><Legend verticalAlign="top" height={32}/><ReferenceLine x={round} stroke="#d8a866"/><Line dataKey="A" name="World A" stroke="#a9ddc6" dot={false} isAnimationActive={false}/><Line dataKey="B" name="World B" stroke="#de8877" dot={false} isAnimationActive={false}/></LineChart></ResponsiveContainer></div><p>{metric==='resource_mean'?'Resource units per agent':'Ratio · fixed [0,1] axis'} · {definition.formula}</p></div>;
+}

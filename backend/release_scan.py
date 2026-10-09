@@ -6,7 +6,7 @@ import subprocess
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
-PUBLIC_DIRS=['backend','frontend/src','frontend/e2e','examples','docs','scripts','.github']
+PUBLIC_DIRS=['backend','frontend/src','frontend/e2e','frontend/public','examples','docs','scripts','.github']
 PATTERNS=[r'(?i)sk-[a-z0-9_-]{24,}',r'(?i)Bearer\s+[a-z0-9_-]{24,}',
           r'(?i)[A-Z]:[\\/]+Users[\\/]+[^\\/\s]+',r'(?i)(?:api_key|password)\s*[:=]\s*["\'][a-z0-9_-]{24,}']
 

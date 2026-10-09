@@ -20,4 +20,5 @@ credentials*.json
 frontend/.vite/
 *.zip
 *.tar.gz
+frontend/public/demo/
 .pytest_cache/

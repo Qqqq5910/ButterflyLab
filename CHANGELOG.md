@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2.0 — Interactive Parallel Worlds
+
+- Default Explore Mode with bilingual free template questions and explicit A/B confirmation.
+- Three real five-seed scenarios: information probability, initial-degree-selected node, cooperation incentive.
+- Shared Agent network, synced playback/seek/speed, recorded transmissions and measured outcomes.
+- Whitelisted share links restore scenario, seed and round; research evidence remains available.
+- GitHub Pages static replay, lazy checksum-verified gzip trajectories and reproducible generation.
+- Local Research Mode, historical formats, scientific engines and optional provider gates preserved.
+- No paid model calls, public backend, public database or tracking scripts.
+
 ## v0.1.1 — Open Source Experience Improvements
 
 - GitHub description and eight capability-specific topics; no hosted homepage.

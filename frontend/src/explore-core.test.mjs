@@ -1,0 +1,14 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {TemplateInterpreter,restoreShare,shareURL,narrative} from './explore-core.mjs';
+const scenarios=JSON.parse(fs.readFileSync('public/demo/manifest.json')).scenarios;
+const interpreter=new TemplateInterpreter();
+test('Chinese and English transmission values agree',()=>{for(const q of ['如果信息传播概率从 0.1 提高到 0.2？','transmission from 0.1 to 0.2']){const i=interpreter.interpret(q,scenarios);assert.equal(i.request.world.transmission,.1);assert.equal(i.request.variant_world.transmission,.2);assert.equal(i.exact,true);}});
+test('double probability has explicit semantics',()=>{const i=interpreter.interpret('如果信息传播速度提高一倍，会怎样？',scenarios);assert.equal(i.request.variant_world.transmission,.2);assert.match(i.note,/not guaranteed/);});
+test('all presets match exact configurations',()=>{for(const s of scenarios){assert.equal(interpreter.interpret(s.question,scenarios).exact,true);assert.equal(interpreter.interpret(s.question_zh,scenarios).exact,true);}});
+test('resource loss is a real local intervention',()=>{for(const q of ['如果一个 Agent 的资源减少 1？','reduce resource by 1']){const i=interpreter.interpret(q,scenarios);assert.equal(i.request.intervention.magnitude,-1);assert.equal(i.request.variant_world,null);assert.equal(i.exact,false);}});
+test('unsupported and illegal inputs do not run',()=>{for(const q of ['predict the stock market','transmission from -1 to 2','resource reduce 99','transmission 0.1','transmission from 0.1 to 0.1'])assert.ok(interpreter.interpret(q,scenarios).error);});
+test('custom valid parameters never silently select a preset',()=>assert.equal(interpreter.interpret('transmission from 0.2 to 0.3',scenarios).exact,false));
+test('share whitelist and bounds',()=>{const url=shareURL('https://example.com/ButterflyLab/','information',43,12);assert.equal(restoreShare(new URL(url).search,scenarios).round,12);for(const q of ['?scenario_id=information&intervention_id=default&seed=42&round=51','?scenario_id=information&intervention_id=default&seed=42&round=1&url=https://bad','?scenario_id=information&intervention_id=default&seed=42&round=1&round=2'])assert.equal(restoreShare(q,scenarios),null);});
+test('narrative uses actual summary and acknowledges zero effects',()=>{const s={coverage:{n:5,baseline_mean:.1,intervention_mean:.2,mean:.1}};assert.match(narrative(s,'coverage'),/10.00 percentage points/);s.coverage.mean=0;assert.match(narrative(s,'coverage'),/No final mean difference/);});

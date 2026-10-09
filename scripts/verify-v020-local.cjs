@@ -1,0 +1,35 @@
+async(page)=>{
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto('http://127.0.0.1:5176/');
+  await page.getByRole('button',{name:'Explore a World',exact:true}).waitFor({state:'visible'});
+  await page.waitForFunction(()=>!document.querySelector('.hero-copy button').disabled);
+  await page.getByRole('button',{name:'Explore a World',exact:true}).click();
+  await page.getByRole('button',{name:'Explore Parallel Worlds',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelectorAll('.parallel-world .node').length===100);
+  await page.getByRole('slider',{name:'Simulation round'}).fill('17');
+  await page.waitForFunction(()=>document.querySelectorAll('.parallel-world .node').length===100);
+  await page.getByRole('button',{name:'Research Mode',exact:true}).click();
+  await page.getByRole('heading',{name:'World Studio',exact:true}).waitFor();
+  await page.getByRole('button',{name:'Run Demo',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelector('.run-status')?.textContent.includes('completed'),{}, {timeout:120000});
+  await page.getByLabel('INTERVENTION',{exact:true}).selectOption('information');
+  await page.locator('#agent').fill('1');await page.locator('#magnitude').fill('1');
+  await page.getByRole('button',{name:'Run A/B experiment',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelector('.run-status')?.textContent.includes('completed'),{}, {timeout:120000});
+  const eid=await page.evaluate(()=>localStorage.getItem('butterflylab.experiment'));
+  await page.getByRole('button',{name:'Save experiment',exact:true}).click();
+  await page.reload();await page.getByRole('button',{name:'Research Mode',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelector('.run-status')?.textContent.includes('completed'));
+  if(await page.evaluate(()=>localStorage.getItem('butterflylab.experiment'))!==eid)throw Error('Refresh recovery failed');
+  const downloadEvent=page.waitForEvent('download');await page.getByRole('link',{name:'Summary JSON',exact:true}).first().click();const download=await downloadEvent;await download.saveAs('output/v020/research-summary.json');
+  const reproduced=await (await page.request.post('http://127.0.0.1:5176/api/experiments/'+eid+'/reproduce')).json();if(!reproduced.identical)throw Error('Reproduction failed');
+  await page.getByRole('tab',{name:'Mock LLM',exact:true}).click();
+  await page.getByRole('button',{name:'Run comparison',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelector('#llm-society .run-status')?.textContent.includes('COMPLETED'),{}, {timeout:120000});
+  await page.getByRole('button',{name:'Recorded Replay',exact:true}).click();
+  await page.getByRole('status').filter({hasText:'Recorded replay: identical states, events and metrics'}).waitFor();
+  const old=await (await page.request.get('http://127.0.0.1:5174/api/experiments/5e5cab8e-43f7-4a38-9e98-163d26609fca/summary')).json();
+  const oldReplay=await (await page.request.post('http://127.0.0.1:5174/api/experiments/5e5cab8e-43f7-4a38-9e98-163d26609fca/reproduce')).json();
+  if(!old.experiment_id||!oldReplay.identical||errors.length)throw Error(JSON.stringify({errors,oldReplay}));
+  return {eid,reproduced,mockReplay:true,oldReplay,errors};
+}

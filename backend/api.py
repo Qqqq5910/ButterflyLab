@@ -19,6 +19,7 @@ from .decisions import ProviderConfig,DecisionProvider
 from .social import simulate_social
 from .llm import Ledger,settings
 from .pilot import PilotRequest,configuration as pilot_configuration,run_pilot,replay_result
+from .explore_mode import ExploreRequest,scenario_catalog,run_explore
 
 class NameRequest(StrictModel):
     experiment_name:str=Field(min_length=1,max_length=120)
@@ -93,6 +94,18 @@ def create_app(db_path=None):
     def env(): return runtime
     @app.get('/api/scenarios')
     def scenarios(): return {'fragile':preset('fragile'),'cascade':preset('cascade')}
+    @app.get('/api/explore/scenarios')
+    def explore_scenarios(): return {'scenarios':scenario_catalog()}
+    @app.post('/api/explore/run',status_code=201)
+    def explore_run(req:ExploreRequest):
+        config=req.model_dump()|{'environment':runtime}
+        eid=store.create(config,'explore')
+        try:
+            result=run_explore(req)
+            store.finish(eid,result)
+            return store.summary(eid)
+        except Exception as error:
+            store.fail(eid,error);raise
     @app.post('/api/world/preview')
     def preview(req:SocialConfig): return initial_world(req.initial_seed,req)
     @app.post('/api/worlds',status_code=201)
@@ -270,7 +283,7 @@ def create_app(db_path=None):
         config=dict(record['configuration']);recorded_env=config.pop('environment',None)
         if recorded_env and recorded_env['fingerprint']!=runtime['fingerprint']:raise HTTPException(409,'Dependency environment differs; exact recomputation rejected.')
         if record['kind']=='llm-pilot':return replay_result(record['result'])|{'engine_version':record['engine_version']}
-        result=replay_cell(record['configuration']) if record['kind']=='scan_cell' else discover(SearchRequest(**config)) if record['kind']=='search' else comparison(RunRequest(**config))
+        result=run_explore(ExploreRequest(**config)) if record['kind']=='explore' else replay_cell(record['configuration']) if record['kind']=='scan_cell' else discover(SearchRequest(**config)) if record['kind']=='search' else comparison(RunRequest(**config))
         return {'identical':result==record['result'],'engine_version':record['engine_version'],
                 'compared':'All configurations, trajectories, snapshots, logs, metrics and summaries; metadata timestamps excluded.'}
     @app.patch('/api/experiments/{eid}')
